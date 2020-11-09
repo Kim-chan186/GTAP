@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일\test_code">
+      <UniqueIdentifier>{0f7e2cb4-2807-4e3d-9be1-159d47f28a2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\utilcv">
+      <UniqueIdentifier>{6c4c09b1-4b70-44f5-979f-d2a545c72724}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\graph">
+      <UniqueIdentifier>{f697d46c-00b1-4741-966e-eb51a7a55483}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="test_code_cam.cpp">
+      <Filter>헤더 파일\test_code</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="utilcv\Debug.h">
+      <Filter>헤더 파일\utilcv</Filter>
+    </ClInclude>
+    <ClInclude Include="utilcv\help_mat.h">
+      <Filter>헤더 파일\utilcv</Filter>
+    </ClInclude>
+    <ClInclude Include="utilcv\key_event.hpp">
+      <Filter>헤더 파일\utilcv</Filter>
+    </ClInclude>
+    <ClInclude Include="utilcv\mouse_event.h">
+      <Filter>헤더 파일\utilcv</Filter>
+    </ClInclude>
+    <ClInclude Include="utilcv\service.h">
+      <Filter>헤더 파일\utilcv</Filter>
+    </ClInclude>
+    <ClInclude Include="data_structure_TSP.h">
+      <Filter>헤더 파일\graph</Filter>
+    </ClInclude>
+    <ClInclude Include="frame.h">
+      <Filter>헤더 파일\graph</Filter>
+    </ClInclude>
+    <ClInclude Include="show_TSP.h">
+      <Filter>헤더 파일\graph</Filter>
+    </ClInclude>
+    <ClInclude Include="MST.hpp">
+      <Filter>헤더 파일\graph</Filter>
+    </ClInclude>
+    <ClInclude Include="Genetic.h">
+      <Filter>헤더 파일\graph</Filter>
+    </ClInclude>
+    <ClInclude Include="population.h">
+      <Filter>헤더 파일\graph</Filter>
+    </ClInclude>
+    <ClInclude Include="individuals.h">
+      <Filter>헤더 파일\graph</Filter>
+    </ClInclude>
+    <ClInclude Include="showMaster.h">
+      <Filter>헤더 파일\utilcv</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="coordi-1.txt">
+      <Filter>헤더 파일\test_code</Filter>
+    </Text>
+    <Text Include="lin318small.txt">
+      <Filter>헤더 파일\test_code</Filter>
+    </Text>
+    <Text Include="coordi1.txt">
+      <Filter>헤더 파일\test_code</Filter>
+    </Text>
+    <Text Include="lin318.txt">
+      <Filter>헤더 파일\test_code</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="lin318small.png">
+      <Filter>헤더 파일\test_code</Filter>
+    </Image>
+    <Image Include="map_outline.jpg">
+      <Filter>헤더 파일\test_code</Filter>
+    </Image>
+    <Image Include="node_map.jpg">
+      <Filter>헤더 파일\test_code</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
