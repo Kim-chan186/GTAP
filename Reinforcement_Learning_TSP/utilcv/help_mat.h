@@ -16,11 +16,14 @@ cv::Scalar P(173, 103, 160);
 namespace GA {
 #define SGROUP	0.10	// 10%
 #define LGROUP	0.80	// 80%-10% = 70%
+						// (mutation) : 10%
 #define LIN		10		// 1/10
 	int LK = LIN;		
 #define COSTGAIN 0.5
 
 #define AUTOSET "AUTOSET"
+#define MATLAB  "Node0128_4.txt"
+
 #define MAPSIZE cv::Size(1000, 1000)
 #define MAXCOST 999999
 
@@ -31,7 +34,7 @@ namespace GA {
 	cv::Scalar sc_line = cv::Scalar::all(30);
 	cv::Scalar sc_edge = cv::Scalar(240, 143, 50) - sc_line;
 
-	//const int thresold_neighbor = sqrt(MAPSIZE.height *MAPSIZE.height + MAPSIZE.width *MAPSIZE.width);
+	//const int thresold_neighbor = sqrt(MAPSIZE.height * MAPSIZE.height + MAPSIZE.width * MAPSIZE.width);
 }
 
 //방법1 : 최대값을 255로 정규화 V
@@ -41,8 +44,8 @@ void check_8UC1(cv::Mat& data){
 		return;
 	}
 	cv::normalize(data, data, 0, 255, cv::NORM_MINMAX, CV_8UC1, cv::noArray());
-
 }
+
 
 // img map의 빨간색 노드 좌표를 파일로 저장, 크기를 1000보다 작게 조절
 void map2node(std::string map_name = "lin318small", std::string map_extension = ".png") {

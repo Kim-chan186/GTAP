@@ -95,7 +95,7 @@ namespace GA {
 			fin >> x >> y;
 			while (!fin.eof()) {
 				Point Node(stoi(x), stoi(y));
-				//cout << Node << endl;
+				cout << Node << endl;
 				coordi.push_back(Node);
 				fin >> x >> y;
 			}
@@ -229,7 +229,7 @@ namespace GA {
 		std::srand((unsigned int)time(NULL));
 
 
-		// 가장 최근 파일로 하도록 수정
+		// 가장 최근 파일로 하도록 수정할 것
 		if (population_number == AUTOSET) {
 			this->node_file_name = "lin318small.txt";
 			//this->node_file_name = "coordi" + to_string(population_number) + ".txt";
@@ -238,6 +238,13 @@ namespace GA {
 			this->map_size = frame.size();
 
 			this->node_file_name = "lin318.txt";
+			this->map_size = cv::Size(3100, 4200);
+		}
+		else if (population_number == MATLAB) {
+			this->node_file_name = MATLAB;
+			this->wall_file_name = "";
+			Mat frame = imread("map2");			// map2 MATLAB에서의 테스르를 위한 흰 배경의 지도
+			this->map_size = frame.size();
 			this->map_size = cv::Size(3100, 4200);
 		}
 		else {
@@ -252,14 +259,14 @@ namespace GA {
 		this->findGraph(Mat(), this->node_file_name);		
 		//this->findGraph(getBinaryMap(), this->node_file_name);		// 원래 map을 입력 받아서 하는 것으로 하려 했음나 필요없어져서 만들지 않음
 
-		int end = this->coordi.size() * 4;
+		int end = this->coordi.size() * 5;
 		if (!end) { // == 0
 			cout << " * population.h error : population : coordi is empty \n";
 			return;
 		}
 		ind_s.reserve(end);
-		individuals* x = &individuals();
-		x->setMapSize(this->map_size);		TTT
+		individuals *x, y = individuals();
+		y.setMapSize(this->map_size);		TTT
 		for (int i = 0; i < end; i++) {
 			//cout << i << "th enforcement \n";
 			 x = new individuals(this->cost, this->coordi);
@@ -274,7 +281,8 @@ namespace GA {
 			//this->draw_all_node();
 
 			namedWindow("population", WINDOW_AUTOSIZE);
-			moveWindow("population", -1050, 0);
+			//moveWindow("population", -1050, 0);
+			moveWindow("population", 150, 0);
 
 			//this->show();
 		}
@@ -310,14 +318,12 @@ namespace GA {
 			this->frame = *(*(iter))->img(this->coordi);
 			printf(" %.3f, ", (*iter++)->cost());
 		}
-		printf(" **  **  **  ** \x1b[36m%d Generate \x1b[0m **  **  **  ** \n\n", ++this->generate);
-		LK = generate/10 + LIN;
 	}// // 
 
 
 	bool population::nextGenerate() {
 		// random 생성
-		int end = coordi.size() * 4; // all
+		int end = coordi.size() * 5; // all
 		int start = end * LGROUP;
 		individuals* x;
 		for (int i = start; i < end; i++) {
@@ -329,15 +335,31 @@ namespace GA {
 		} cout << "end next random individuals \n";
 
 		// 교배
-		start = end * SGROUP;
+		start = end* SGROUP;
 		int cros = start;
 		for (int i = start; i < end; i++) {
-			ind_s.at(i)->NCX(this->cost, this->coordi, this->ind_s.at(rand() % cros), neighbor);
+			int num = rand() % start;
+			//if(num>50)	num = end - (num - 45);
+			ind_s.at(i)->NCX(this->cost, this->coordi, this->ind_s.at(num), neighbor);
+			double cost = ind_s.at(i)->cost();
+			for (int j = start; j < i; j++) {
+				if (ind_s.at(j)->cost() == cost) {
+					cost = ind_s.at(i)->cost();
+					ind_s.at(i)->NCX(this->cost, this->coordi, this->ind_s.at(num), neighbor);
+					cost = ind_s.at(i)->cost();
+					//cout << " re ";
+				}
+				
+			}
 			//ind_s.at(i)->SCX(this->cost, this->coordi, this->ind_s.at(rand() % cros));
 
 			if (ind_s.at(i)->check_cycle())					quick_exit(EXIT_SUCCESS);
 		} cout << "end next NCX individuals \n";
+
 		this->_sort();
+		printf(" **  **  **  ** \x1b[36m%d Generate \x1b[0m **  **  **  ** \n\n", ++this->generate);
+		LK = generate / 1000 + LIN;
+
 		this->show();
 	}
 

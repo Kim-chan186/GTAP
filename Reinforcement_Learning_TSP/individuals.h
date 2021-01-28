@@ -113,7 +113,7 @@ namespace GA {
 
 		if (VISUALIZATION) {
 			if(nullptr != this->frame) delete this->frame;
-			int d = 10;
+			int d = 1;
 			this->frame = new Mat(this->map_size/d, CV_8UC3, Scalar::all(0));
 			for (int i = 0; i < this->lengh - 1; i++) {
 				line(*frame, vec.at(genome2[i]) / d, vec.at(genome2[i + 1]) / d, sc_edge, edge_thin/3);
@@ -124,7 +124,7 @@ namespace GA {
 			return this->frame;
 		}
 		else
-			return &Mat();
+			return nullptr;
 	}
 
 	// ptr의 값이 1인 것중 랜덤한 것을 반환
@@ -155,14 +155,25 @@ namespace GA {
 				edge1 = i - 1 + (i == 0) * box_size,
 				edge2 = (i + 1) * (i != (box_size - 1));
 			//printf("%d (%d// %d, %d), (%d// %d %d) \n", i, N1, parents.genome2[edge1], parents.genome2[edge2], N2, this->genome2[edge1], this->genome2[edge2]);
-			//genome_box.at(N1).emplace_back(str_genome(parents->genome2[edge1], costMat.at<double>(parents->genome2[edge1], N1) * (rand() % 10) / 10));
-			//genome_box.at(N1).emplace_back(str_genome(parents->genome2[edge2], costMat.at<double>(parents->genome2[edge2], N1) * (rand() % 10) / 10));
-			//genome_box.at(N2).emplace_back(str_genome(this->genome2[edge1], costMat.at<double>(this->genome2[edge1], N2) * (rand() % 10) / 10));
-			//genome_box.at(N2).emplace_back(str_genome(this->genome2[edge2], costMat.at<double>(this->genome2[edge2], N2) * (rand() % 10) / 10));
-			genome_box.at(N1).emplace_back(str_genome(parents->genome2[edge1], costMat.at<double>(parents->genome2[edge1], N1) + (rand() % 200)));
-			genome_box.at(N1).emplace_back(str_genome(parents->genome2[edge2], costMat.at<double>(parents->genome2[edge2], N1) + (rand() % 200)));
-			genome_box.at(N2).emplace_back(str_genome(this->genome2[edge1], costMat.at<double>(this->genome2[edge1], N2) + (rand() % 200)));
-			genome_box.at(N2).emplace_back(str_genome(this->genome2[edge2], costMat.at<double>(this->genome2[edge2], N2) + (rand() % 200)));
+
+		//	genome_box.at(N1).emplace_back(str_genome(parents->genome2[edge1], costMat.at<double>(parents->genome2[edge1], N1) * (rand() % 10) / 10));
+		//	genome_box.at(N1).emplace_back(str_genome(parents->genome2[edge2], costMat.at<double>(parents->genome2[edge2], N1) * (rand() % 10) / 10));
+		//	genome_box.at(N2).emplace_back(str_genome(this->genome2[edge1], costMat.at<double>(this->genome2[edge1], N2) * (rand() % 10) / 10));
+		//	genome_box.at(N2).emplace_back(str_genome(this->genome2[edge2], costMat.at<double>(this->genome2[edge2], N2) * (rand() % 10) / 10));
+
+		//	genome_box.at(N1).emplace_back(str_genome(parents->genome2[edge1], costMat.at<double>(parents->genome2[edge1], N1) + (rand() % 200)));
+		//	genome_box.at(N1).emplace_back(str_genome(parents->genome2[edge2], costMat.at<double>(parents->genome2[edge2], N1) + (rand() % 200)));
+		//	genome_box.at(N2).emplace_back(str_genome(this->genome2[edge1], costMat.at<double>(this->genome2[edge1], N2) + (rand() % 200)));
+		//	genome_box.at(N2).emplace_back(str_genome(this->genome2[edge2], costMat.at<double>(this->genome2[edge2], N2) + (rand() % 200)));
+
+			if (costMat.at<double>(parents->genome2[edge1], N1) < 500);
+				genome_box.at(N1).emplace_back(str_genome(parents->genome2[edge1], costMat.at<double>(parents->genome2[edge1], N1) + (rand() % 200)));
+			if (costMat.at<double>(parents->genome2[edge2], N1) < 500);
+				genome_box.at(N1).emplace_back(str_genome(parents->genome2[edge2], costMat.at<double>(parents->genome2[edge2], N1) + (rand() % 200)));
+			if (costMat.at<double>(this->genome2[edge1], N2) < 500);
+				genome_box.at(N2).emplace_back(str_genome(this->genome2[edge1], costMat.at<double>(this->genome2[edge1], N2) + (rand() % 200)));
+			if (costMat.at<double>(this->genome2[edge2], N2) < 500);
+				genome_box.at(N2).emplace_back(str_genome(this->genome2[edge2], costMat.at<double>(this->genome2[edge2], N2) + (rand() % 200)));
 		}
 		bool* genome_check = new bool[box_size];
 		for (int i = 0; i < box_size; i++) {

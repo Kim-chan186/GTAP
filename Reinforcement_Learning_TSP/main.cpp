@@ -24,18 +24,23 @@
 using namespace cv;
 using namespace std;
 
+
+
+
 int main(int, char**){
 	////show 설정 출력하는 구문 만들기
 	//map2node("node_map", ".jpg");
 	//pause;
 
 	int ms = 1;
-	GA::population ob(AUTOSET);		//AUTOSET : lin 318
+	//GA::population ob(AUTOSET);		//AUTOSET : lin 318
 	//GA::population ob("1");
+	GA::population ob(MATLAB);			
 	for (;chan::waitKeySuper(ms) != 28 && service::Check_Time(1);) {
 		ob.nextGenerate();
 		if(!ms)	service::Check_Time(1);
 	}
+
 	//cv::VideoCapture cap(1);
 	//cap.set(CAP_PROP_EXPOSURE, -6);
 	//Mat img;

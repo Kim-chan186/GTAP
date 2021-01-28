@@ -96,5 +96,8 @@
     <Image Include="node_map.jpg">
       <Filter>헤더 파일\test_code</Filter>
     </Image>
+    <Image Include="..\..\..\..\바탕 화면\EL_MATLAB\map\map2.png">
+      <Filter>헤더 파일\test_code</Filter>
+    </Image>
   </ItemGroup>
 </Project>

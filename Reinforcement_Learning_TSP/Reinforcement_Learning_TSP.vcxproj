@@ -171,6 +171,7 @@
     <Text Include="coordi1.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\..\바탕 화면\EL_MATLAB\map\map2.png" />
     <Image Include="lin318small.png" />
     <Image Include="map_outline.jpg" />
     <Image Include="node_map.jpg" />
